@@ -699,92 +699,26 @@ function compose() {
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _redux = __webpack_require__(8);
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _index = __webpack_require__(24);
 
-//step 3 define reducers
-// create a reducer by passing two arguments, state & action which then returns the state
-// note - you must set an initial value to the state, state=0;
-// note - second version of this code - is passing POST_BOOK - state={}
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { books: [] };
-    var action = arguments[1];
+var _index2 = _interopRequireDefault(_index);
 
-    // the use of reducers is to evaluate what to do with the received action
-    switch (action.type) {
-        // if action type is = to increment, update state, add payload 
-        // case "INCREMENT":
-        //     return state + action.payload;
-        //     break;
-        // case "DECREMENT":
-        //     return state - action.payload;
-        //     break;
-        // case "POST_BOOK1":
-        //     return state = action.payload;
-        //     break;
-        case "POST_BOOK":
-            // note - concat will add each action to books
-            // output - first call will hold 2 books, second will hold 3
-            // let books = state.books.concat(action.payload);
-            // return {books};
-            // spread operator - will create a copy of the combined arrays
-            return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) };
-            break;
-        case "DELETE_BOOK":
-            // Create a copy of the current array of books
-            var currentBookToDelete = [].concat(_toConsumableArray(state.books));
-            // Determine at which index in books array is the book to be deleted
-            var indexToDelete = currentBookToDelete.findIndex(function (book) {
-                return book.id === action.payload.id;
-            });
-            console.log(indexToDelete);
-            // use slice to remove the book at the specified index
-            return {
-                books: [].concat(_toConsumableArray(currentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(currentBookToDelete.slice(indexToDelete + 1)))
-            };
-            break;
-        case "UPDATE_BOOK":
-            // Create a copy of the current array of books
-            var currentBookToUpdate = [].concat(_toConsumableArray(state.books));
-            // Determine at which index in books array is the book to be deleted
-            var indexToUpdate = currentBookToUpdate.findIndex(function (book) {
-                return book.id === action.payload.id;
-            });
-            // Create a new book object with the new values and with the same array index of the item we want to replace. To achieve this we will use ...spread but we could use concat methods too
-            var newBookToUpdate = _extends({}, currentBookToUpdate[indexToUpdate], { title: action.payload.title
-            });
-            console.log("what is it newBookToUpdate", newBookToUpdate);
-            //use slice to remove the book at the specified index, replace with the new object and concatenate
-            return { books: [].concat(_toConsumableArray(currentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(currentBookToUpdate.slice(indexToUpdate + 1))) };
-            break;
-    }
-    return state;
-};
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//step 1 create store
-//to create store - you must pass the reducers as an argument
-var store = (0, _redux.createStore)(reducer);
+//step 1 create store   #to create store - you must pass the reducers as an argument
+var store = (0, _redux.createStore)(_index2.default);
 //to see what is the current state of the store, use subscribe method that add a listener to store, log result using getState
+
+
+// IMPORT combined reducers
 store.subscribe(function () {
     //console.log('current state is: ' + store.getState());
     console.log('current state is: ', store.getState());
     //console.log('current price 2nd book: ', store.getState()[1].price);
     //console.log('current description 1st book: ', store.getState()[0].description);
 });
-
-//step 2 create & dispatch actions
-// an action is made by a method that has two properties
-// type = keyword, payload = Anything
-
-// this will increment the value +1 //output = 1
-// store.dispatch({ type: "INCREMENT", payload: 1 });
-// this will increment the value +1 //output = 2
-//store.dispatch({ type: "INCREMENT", payload: 1 });
-// this will decrement the value - 1 // output = 1
-//store.dispatch({ type: "DECREMENT", payload: 1 });
 
 store.dispatch({
     type: "POST_BOOK",
@@ -831,6 +765,147 @@ store.dispatch({
         title: "this is a new title"
     }
 });
+
+// OLD CODE - Working - react / redux console.log examples
+// "use strict"
+
+// import { createStore } from 'redux';
+
+// //step 3 define reducers
+// // create a reducer by passing two arguments, state & action which then returns the state
+// // note - you must set an initial value to the state, state=0;
+// // note - second version of this code - is passing POST_BOOK - state={}
+// const reducer = function (state = { books: [] }, action) {
+//     // the use of reducers is to evaluate what to do with the received action
+//     switch (action.type) {
+//         // if action type is = to increment, update state, add payload 
+//         // case "INCREMENT":
+//         //     return state + action.payload;
+//         //     break;
+//         // case "DECREMENT":
+//         //     return state - action.payload;
+//         //     break;
+//         // case "POST_BOOK1":
+//         //     return state = action.payload;
+//         //     break;
+//         case "POST_BOOK":
+//             // note - concat will add each action to books
+//             // output - first call will hold 2 books, second will hold 3
+//             // let books = state.books.concat(action.payload);
+//             // return {books};
+//             // spread operator - will create a copy of the combined arrays
+//             return { books: [...state.books, ...action.payload] }
+//             break;
+//         case "DELETE_BOOK":
+//             // Create a copy of the current array of books
+//             const currentBookToDelete = [...state.books]
+//             // Determine at which index in books array is the book to be deleted
+//             const indexToDelete = currentBookToDelete.findIndex(
+//                 function (book) {
+//                     return book.id === action.payload.id;
+//                 }
+//             )
+//             console.log(indexToDelete)
+//             // use slice to remove the book at the specified index
+//             return {
+//                 books: [...currentBookToDelete.slice(0, indexToDelete),
+//                 ...currentBookToDelete.slice(indexToDelete + 1)]
+//             }
+//             break;
+//         case "UPDATE_BOOK":
+//             // Create a copy of the current array of books
+//             const currentBookToUpdate = [...state.books]
+//             // Determine at which index in books array is the book to be deleted
+//             const indexToUpdate = currentBookToUpdate.findIndex(
+//                 function (book) {
+//                     return book.id === action.payload.id;
+//                 }
+//             )
+//             // Create a new book object with the new values and with the same array index of the item we want to replace. To achieve this we will use ...spread but we could use concat methods too
+//             const newBookToUpdate = {
+//                 ...currentBookToUpdate[indexToUpdate], title: action.payload.title
+//             }
+//             console.log("what is it newBookToUpdate", newBookToUpdate);
+//             //use slice to remove the book at the specified index, replace with the new object and concatenate
+//             return { books: [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentBookToUpdate.slice(indexToUpdate + 1)] }
+//             break;
+//     }
+//     return state;
+// }
+
+
+// //step 1 create store
+// //to create store - you must pass the reducers as an argument
+// const store = createStore(reducer);
+// //to see what is the current state of the store, use subscribe method that add a listener to store, log result using getState
+// store.subscribe(function () {
+//     //console.log('current state is: ' + store.getState());
+//     console.log('current state is: ', store.getState());
+//     //console.log('current price 2nd book: ', store.getState()[1].price);
+//     //console.log('current description 1st book: ', store.getState()[0].description);
+// })
+
+
+// //step 2 create & dispatch actions
+// // an action is made by a method that has two properties
+// // type = keyword, payload = Anything
+
+// // this will increment the value +1 //output = 1
+// // store.dispatch({ type: "INCREMENT", payload: 1 });
+// // this will increment the value +1 //output = 2
+// //store.dispatch({ type: "INCREMENT", payload: 1 });
+// // this will decrement the value - 1 // output = 1
+// //store.dispatch({ type: "DECREMENT", payload: 1 });
+
+// store.dispatch({
+//     type: "POST_BOOK",
+//     payload: [{
+//         id: 1,
+//         title: 'this is the book title',
+//         description: 'this is the book description',
+//         price: 33.33
+//     },
+//     {
+//         id: 2,
+//         title: 'this is the second book title',
+//         description: 'this is the second book description',
+//         price: 603
+//     }
+//     ]
+// })
+
+// // DISPATCH second action to post a new book
+
+// store.dispatch({
+//     type: "POST_BOOK",
+//     payload: [{
+//         id: 3,
+//         title: 'this is the third book title',
+//         description: 'this is the  third book description',
+//         price: 99
+//     }]
+// });
+
+
+// // DELETE a book
+
+// store.dispatch({
+//     type: "DELETE_BOOK",
+//     payload: {
+//         id: 1
+//     }
+// });
+
+
+// // UPDATE a book
+
+// store.dispatch({
+//     type: "UPDATE_BOOK",
+//     payload: {
+//         id: 3,
+//         title: "this is a new title"
+//     }
+// })
 
 /***/ }),
 /* 8 */
@@ -1440,6 +1515,87 @@ function applyMiddleware() {
       });
     };
   };
+}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(8);
+
+var _booksReducers = __webpack_require__(25);
+
+// Here combine the reducers
+exports.default = (0, _redux.combineReducers)({
+    books: _booksReducers.booksReducers
+});
+
+// Here import reducers to be combined
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+//step 3 define reducers
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.booksReducers = booksReducers;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function booksReducers() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { books: [] };
+    var action = arguments[1];
+
+    // the use of reducers is to evaluate what to do with the received action
+    switch (action.type) {
+        case "POST_BOOK":
+            return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) };
+            break;
+        case "DELETE_BOOK":
+            // Create a copy of the current array of books
+            var currentBookToDelete = [].concat(_toConsumableArray(state.books));
+            // Determine at which index in books array is the book to be deleted
+            var indexToDelete = currentBookToDelete.findIndex(function (book) {
+                return book.id === action.payload.id;
+            });
+            console.log(indexToDelete);
+            // use slice to remove the book at the specified index
+            return {
+                books: [].concat(_toConsumableArray(currentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(currentBookToDelete.slice(indexToDelete + 1)))
+            };
+            break;
+        case "UPDATE_BOOK":
+            // Create a copy of the current array of books
+            var currentBookToUpdate = [].concat(_toConsumableArray(state.books));
+            // Determine at which index in books array is the book to be deleted
+            var indexToUpdate = currentBookToUpdate.findIndex(function (book) {
+                return book.id === action.payload.id;
+            });
+            // Create a new book object with the new values and with the same array index of the item we want to replace. To achieve this we will use ...spread but we could use concat methods too
+            var newBookToUpdate = _extends({}, currentBookToUpdate[indexToUpdate], { title: action.payload.title
+            });
+            console.log("what is it newBookToUpdate", newBookToUpdate);
+            //use slice to remove the book at the specified index, replace with the new object and concatenate
+            return { books: [].concat(_toConsumableArray(currentBookToUpdate.slice(0, indexToUpdate)), [newBookToUpdate], _toConsumableArray(currentBookToUpdate.slice(indexToUpdate + 1))) };
+            break;
+    }
+    return state;
 }
 
 /***/ })
