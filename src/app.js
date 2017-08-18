@@ -29,41 +29,46 @@ render(
     </Provider>, document.getElementById('app')
 );
 
-// ADD a book
-store.dispatch(postBooks([{
-    id: 1,
-    title: 'this is the book title',
-    description: 'this is the book description',
-    price: 33.33
-},
-{
-    id: 2,
-    title: 'this is the second book title',
-    description: 'this is the second book description',
-    price: 603
-},
-{
-    id: 4,
-    title: 'this is book 4 title',
-    description: 'this is the 4th book description',
-    price: 603
-}])
-)
 
-// // DELETE a book
 
-// store.dispatch(deleteBooks({id: 4}))
 
-// // UPDATE a book
 
-// store.dispatch(updateBooks({
-//     id: 2,
-//     title: 'this is the new new title'
-// }))
 
-// // /// --->> CREATE CART ACTIONS <<--
+// // ADD a book
+    // store.dispatch(postBooks([{
+    //     id: 1,
+    //     title: 'this is the book title',
+    //     description: 'this is the book description',
+    //     price: 33.33
+    // },
+    // {
+    //     id: 2,
+    //     title: 'this is the second book title',
+    //     description: 'this is the second book description',
+    //     price: 603
+    // },
+    // {
+    //     id: 4,
+    //     title: 'this is book 4 title',
+    //     description: 'this is the 4th book description',
+    //     price: 603
+    // }])
+    // )
 
-// store.dispatch(addToCart([{ id: 1 }]))
+    // // DELETE a book
+
+    // store.dispatch(deleteBooks({id: 4}))
+
+    // // UPDATE a book
+
+    // store.dispatch(updateBooks({
+    //     id: 2,
+    //     title: 'this is the new new title'
+    // }))
+
+    // // /// --->> CREATE CART ACTIONS <<--
+
+    // store.dispatch(addToCart([{ id: 1 }]))
 
 
 
