@@ -32,13 +32,15 @@ class BooksList extends React.Component{
                     <h2>{booksArr.title}</h2>
                     <h2>{booksArr.description}</h2>
                     <h2>{booksArr.price}</h2>
+                    <Button bsStyle='primary'>Buy Now</Button>
                 </div>
             )
         })
         return(
         <div> 
-            <h1>Hello React</h1>
-            {booksList}
+            <Row style={{marginTop:'10px'}}>
+                {booksList}
+            </Row>
         </div>
         )
     }

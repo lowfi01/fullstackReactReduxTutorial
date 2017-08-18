@@ -25297,6 +25297,11 @@ var BooksList = function (_React$Component) {
                         'h2',
                         null,
                         booksArr.price
+                    ),
+                    _react2.default.createElement(
+                        _reactBootstrap.Button,
+                        { bsStyle: 'primary' },
+                        'Buy Now'
                     )
                 );
             });
@@ -25304,11 +25309,10 @@ var BooksList = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Hello React'
-                ),
-                booksList
+                    _reactBootstrap.Row,
+                    { style: { marginTop: '10px' } },
+                    booksList
+                )
             );
         }
     }]);
