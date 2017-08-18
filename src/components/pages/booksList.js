@@ -8,37 +8,51 @@ import { bindActionCreators } from 'redux';
 import { getBooks } from './../../actions/booksActions';
 import { Grid, Col, Row, Button } from 'react-bootstrap';
 
+// BookItem (dummy component) - receives props from booksList
+import BookItem  from  './bookItem';
+
+
 class BooksList extends React.Component{
     componentDidCatch() {
         //Dispatch an action
         this.props.getBooks([{
-            id: 1,
-            title: 'this is the book title',
-            description: 'this is the book description',
-            price: 40.33
-        },
-        {
-            id: 2,
-            title: 'this is the second book title',
-            description: 'this is the second book description',
-            price: 60
-        }]);
+        id: 1,
+        title: 'this is the book title',
+        description: 'this is the book description',
+        price: 40.33
+    },
+    {
+        id: 2,
+        title: 'this is the second book title',
+        description: 'this is the second book description',
+        price: 60
+    }]);
     }
     render() {
         //console.log('ARE WE ACCESSING THE STATE?? : ', this.props.books);
         const booksList = this.props.books.map(function(booksArr){
             return(
-                <div key={booksArr.id}>
-                    <h2>{booksArr.title}</h2>
-                    <h2>{booksArr.description}</h2>
-                    <h2>{booksArr.price}</h2>
-                    <Button bsStyle='primary'>Buy Now</Button>
-                </div>
+
+                <Col xs={12} sm={6} md={4} key={booksArr.id}>
+                    <BookItem
+                        id={booksArr.id}
+                        title={booksArr.title}
+                        description={booksArr.description}
+                        price={booksArr.price}/>
+                </Col>
+
+                // <div key={booksArr.id}>
+                //     <h2>{booksArr.title}</h2>
+                //     <h2>{booksArr.description}</h2>
+                //     <h2>{booksArr.price}</h2>
+                //     <Button bsStyle='primary'>Buy Now</Button>
+                // </div>
             )
         })
+
         return(
         <div> 
-            <Row style={{marginTop:'10px'}}>
+            <Row>
                 {booksList}
             </Row>
         </div>
@@ -55,7 +69,7 @@ function mapStateToProps(state){
 
 //mapDispatchToProps - this will allow us to pass down access to actions
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({getBooks: getBooks, otherAction: otherAction}, dispatch)
+    return bindActionCreators({getBooks: getBooks}, dispatch)
 }
 
 
