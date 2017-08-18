@@ -10,7 +10,7 @@ import { Grid, Col, Row, Button } from 'react-bootstrap';
 
 // BookItem (dummy component) - receives props from booksList
 import BookItem  from  './bookItem';
-
+import BooksForm from  './booksForms';
 
 class BooksList extends React.Component{
     componentDidCatch() {
@@ -29,7 +29,6 @@ class BooksList extends React.Component{
     }]);
     }
     render() {
-        //console.log('ARE WE ACCESSING THE STATE?? : ', this.props.books);
         const booksList = this.props.books.map(function(booksArr){
             return(
 
@@ -53,6 +52,9 @@ class BooksList extends React.Component{
         return(
         <div> 
             <Row>
+                <Col xs={12} sm={6}>
+                    <BooksForm />                    
+                </Col>
                 {booksList}
             </Row>
         </div>
