@@ -71,7 +71,7 @@ function mapStateToProps(state){
 
 //mapDispatchToProps - this will allow us to pass down access to actions
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({getBooks: getBooks}, dispatch)
+    return bindActionCreators({getBooks}, dispatch)
 }
 
 
