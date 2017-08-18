@@ -50,20 +50,20 @@ store.dispatch(postBooks([{
 }])
 )
 
-// DELETE a book
+// // DELETE a book
 
-store.dispatch(deleteBooks({id: 4}))
+// store.dispatch(deleteBooks({id: 4}))
 
-// UPDATE a book
+// // UPDATE a book
 
-store.dispatch(updateBooks({
-    id: 2,
-    title: 'this is the new new title'
-}))
+// store.dispatch(updateBooks({
+//     id: 2,
+//     title: 'this is the new new title'
+// }))
 
-// /// --->> CREATE CART ACTIONS <<--
+// // /// --->> CREATE CART ACTIONS <<--
 
-store.dispatch(addToCart([{ id: 1 }]))
+// store.dispatch(addToCart([{ id: 1 }]))
 
 
 

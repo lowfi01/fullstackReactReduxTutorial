@@ -11322,20 +11322,21 @@ store.dispatch((0, _booksActions.postBooks)([{
     price: 603
 }]));
 
-// DELETE a book
+// // DELETE a book
 
-store.dispatch((0, _booksActions.deleteBooks)({ id: 4 }));
+// store.dispatch(deleteBooks({id: 4}))
 
-// UPDATE a book
+// // UPDATE a book
 
-store.dispatch((0, _booksActions.updateBooks)({
-    id: 2,
-    title: 'this is the new new title'
-}));
+// store.dispatch(updateBooks({
+//     id: 2,
+//     title: 'this is the new new title'
+// }))
 
-// /// --->> CREATE CART ACTIONS <<--
+// // /// --->> CREATE CART ACTIONS <<--
 
-store.dispatch((0, _cartActions.addToCart)([{ id: 1 }]));
+// store.dispatch(addToCart([{ id: 1 }]))
+
 
 // // DISPATCH second action to post a new book
 // store.dispatch({
@@ -25194,6 +25195,8 @@ function updateBooks(book) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// BookList will be our smart component
+
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -25228,7 +25231,28 @@ var BooksList = function (_React$Component) {
     _createClass(BooksList, [{
         key: 'render',
         value: function render() {
-            console.log('ARE WE ACCESSING THE STATE?? : ', this.props.books);
+            //console.log('ARE WE ACCESSING THE STATE?? : ', this.props.books);
+            var booksList = this.props.books.map(function (booksArr) {
+                return _react2.default.createElement(
+                    'div',
+                    { key: booksArr.id },
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        booksArr.title
+                    ),
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        booksArr.description
+                    ),
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        booksArr.price
+                    )
+                );
+            });
             return _react2.default.createElement(
                 'div',
                 null,
@@ -25236,13 +25260,17 @@ var BooksList = function (_React$Component) {
                     'h1',
                     null,
                     'Hello React'
-                )
+                ),
+                booksList
             );
         }
     }]);
 
     return BooksList;
 }(_react2.default.Component);
+
+// mapStateToProps - access to the piece of start we wish to access
+
 
 function mapStateToProps(state) {
     return {
