@@ -16,7 +16,7 @@ export function booksReducers(state = { books: [] }, action) {
                     return book.id === action.payload.id;
                 }
             )
-            console.log(indexToDelete)
+            //console.log(indexToDelete)
             // use slice to remove the book at the specified index
             return {
                 books: [...currentBookToDelete.slice(0, indexToDelete),
@@ -36,7 +36,7 @@ export function booksReducers(state = { books: [] }, action) {
             const newBookToUpdate = {
                 ...currentBookToUpdate[indexToUpdate], title: action.payload.title
             }
-            console.log("what is it newBookToUpdate", newBookToUpdate);
+            //console.log("what is it newBookToUpdate", newBookToUpdate);
             //use slice to remove the book at the specified index, replace with the new object and concatenate
             return { books: [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentBookToUpdate.slice(indexToUpdate + 1)] }
             break;
