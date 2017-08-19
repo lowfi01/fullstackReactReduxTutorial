@@ -12,6 +12,23 @@ import { deleteCartItem } from './../../actions/cartActions';
 
 class Cart extends React.Component{
 
+
+        onDelete(_id){
+            // WE COPIED THIS CODE FROM BOOKS REDUCERS - DELETE BOOK
+            const currentBookToDelete = this.props.cart
+            console.log(currentBookToDelete);
+            const indexToDelete = currentBookToDelete.findIndex(
+                function (cart) {
+                    return cart._id === _id;
+                }
+            )
+            console.log(indexToDelete);
+            let cartDelete = [...currentBookToDelete.slice(0, indexToDelete), ...currentBookToDelete.slice(indexToDelete + 1)];
+            
+            console.log(cartDelete);
+            this.props.deleteCartItem(cartDelete)
+    }
+
     render() {
         // if one items in cart - then render to cart
         if(this.props.cart[0]){
@@ -22,20 +39,7 @@ class Cart extends React.Component{
 
     }
 
-    onDelete(_id){
-            // WE COPIED THIS CODE FROM BOOKS REDUCERS - DELETE BOOK
-            const currentBookToDelete = this.props.cart
-            const indexToDelete = currentBookToDelete.findIndex(
-                function (cart) {
-                    return cart._id === _id;
-                }
-            )
-            console.log(indexToDelete);
-            var cartAfterDelete = [...currentBookToDelete.slice(0, indexToDelete),
-                ...currentBookToDelete.slice(indexToDelete + 1)]
-            
-            this.props.deleteCartItem(cartAfterDelete)
-    }
+
 
     renderEmpty(){
         // return empty div
