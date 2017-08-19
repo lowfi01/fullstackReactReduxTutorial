@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Panel, Col, Row, Well, Button } from 'react-bootstrap';
+import { Panel, Col, Row, Well, Button, ButtonGroup, Label } from 'react-bootstrap';
 
 class Cart extends React.Component{
 
@@ -28,10 +28,24 @@ class Cart extends React.Component{
         // map over cart & return list of items
         const cartItemsList = this.props.cart.map((cartArr)=> {
             return (
-                <Panel key={cartArr.id}> 
+                <Panel key={cartArr._id}> 
                     <Row>
                         <Col xs={12} sm={4}>
-                            <h6>{cartArr.title}</h6>
+                            <h6>{cartArr.title}</h6><span>    </span>
+                        </Col>
+                        <Col xs={12} sm={2}>
+                            <h6>AUD. {cartArr.price}</h6>
+                        </Col>
+                        <Col xs={12} sm={2}>
+                            <h6>qty. <Label bsStyle="success"></Label></h6>
+                        </Col>
+                        <Col xs={6} sm={4}>
+                            <ButtonGroup style={{minWidth:'300px'}}>
+                                <Button bsStyle="default" bsSize="small">-</Button>
+                                <Button bsStyle="default" bsSize="small">+</Button>
+                                <span>     </span>
+                               <Button bsStyle="danger" bsSize="small">DELETE</Button>
+                            </ButtonGroup>
                         </Col>
                     </Row>
                 </Panel>
