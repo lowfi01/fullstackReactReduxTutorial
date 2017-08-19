@@ -44704,6 +44704,15 @@ var Cart = function (_React$Component) {
                         _reactBootstrap.Modal.Footer,
                         null,
                         _react2.default.createElement(
+                            _reactBootstrap.Col,
+                            { xs: 6 },
+                            _react2.default.createElement(
+                                'h6',
+                                null,
+                                'total $:'
+                            )
+                        ),
+                        _react2.default.createElement(
                             _reactBootstrap.Button,
                             { onClick: this.close.bind(this) },
                             'Close'
