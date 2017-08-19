@@ -5,6 +5,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Panel, Col, Row, Well, Button, ButtonGroup, Label } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
+
+import { deleteCartItem } from './../../actions/cartActions';
+
 
 class Cart extends React.Component{
 
@@ -17,6 +21,22 @@ class Cart extends React.Component{
         }
 
     }
+
+    onDelete(_id){
+            // WE COPIED THIS CODE FROM BOOKS REDUCERS - DELETE BOOK
+            const currentBookToDelete = this.props.cart
+            const indexToDelete = currentBookToDelete.findIndex(
+                function (cart) {
+                    return cart._id === _id;
+                }
+            )
+            console.log(indexToDelete);
+            var cartAfterDelete = [...currentBookToDelete.slice(0, indexToDelete),
+                ...currentBookToDelete.slice(indexToDelete + 1)]
+            
+            this.props.deleteCartItem(cartAfterDelete)
+    }
+
     renderEmpty(){
         // return empty div
         return(
@@ -44,13 +64,13 @@ class Cart extends React.Component{
                                 <Button bsStyle="default" bsSize="small">-</Button>
                                 <Button bsStyle="default" bsSize="small">+</Button>
                                 <span>     </span>
-                               <Button bsStyle="danger" bsSize="small">DELETE</Button>
+                               <Button onClick={this.onDelete.bind(this, cartArr._id)} bsStyle="danger" bsSize="small">DELETE</Button>
                             </ButtonGroup>
                         </Col>
                     </Row>
                 </Panel>
             )
-        })
+        }, this)
         // return panel of cart items
         return(
             <Panel header="Cart" bsStyle="primary">
@@ -66,4 +86,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Cart);
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({
+        deleteCartItem
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
