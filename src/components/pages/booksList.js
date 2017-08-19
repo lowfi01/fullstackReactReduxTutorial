@@ -11,22 +11,12 @@ import { Grid, Col, Row, Button } from 'react-bootstrap';
 // BookItem (dummy component) - receives props from booksList
 import BookItem  from  './bookItem';
 import BooksForm from  './booksForms';
+import Cart from './cart';
 
 class BooksList extends React.Component{
     componentDidCatch() {
         //Dispatch an action
-        this.props.getBooks([{
-        id: 1,
-        title: 'this is the book title',
-        description: 'this is the book description',
-        price: 40.33
-    },
-    {
-        id: 2,
-        title: 'this is the second book title',
-        description: 'this is the second book description',
-        price: 60
-    }]);
+        this.props.getBooks();
     }
     render() {
         const booksList = this.props.books.map(function(booksArr){
@@ -50,14 +40,17 @@ class BooksList extends React.Component{
         })
 
         return(
-        <div> 
+        <Grid> 
+            <Row>
+                <Cart/>
+            </Row>
             <Row>
                 <Col xs={12} sm={6}>
                     <BooksForm />                    
                 </Col>
                 {booksList}
             </Row>
-        </div>
+        </Grid>
         )
     }
 }
