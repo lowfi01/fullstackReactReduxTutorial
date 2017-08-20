@@ -30,9 +30,12 @@ export function booksReducers(state = { // we hard code te books data
             // Determine at which index in books array is the book to be deleted
             const indexToDelete = currentBookToDelete.findIndex(
                 function (book) {
-                    return book._id === action.payload._id;
+                    // Note - This code that is commented is searching for exactly a string, while the code below will allow for string/int, we are sending an _id of string & the expectation is currently number
+                    //return book._id.toString() === action.payload;
+                    return book._id == action.payload;
                 }
             )
+
             //console.log(indexToDelete)
             // use slice to remove the book at the specified index
             return {
