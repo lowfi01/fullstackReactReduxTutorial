@@ -8,6 +8,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
+// REACT-ROUTER
+import { Router, Route, IndexRoute, browserHistory, hashHistory } from 'react-router';
+
 // IMPORT COMBINED REDUCERS
 import reducers from './reducers/index';
 
@@ -17,22 +20,36 @@ import { postBooks, deleteBooks, updateBooks} from './actions/booksActions'
 
 // IMPORT COMPONENTS 
 import BooksList from './components/pages/booksList';
-import Menu from './components/menu';
-import Footer from './components/footer';
+import Cart from './components/pages/cart';
+import BookForm from './components/pages/booksForms';
+import Main from './main';
+
+// remove- menu and footer, as we will be using the main.js
+// import Menu from './components/menu';
+// import Footer from './components/footer';
 
 
 //STEP 1 create the store
 const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
-render(
+
+// Variable to make ease of reading
+const Routes = (
     <Provider store={store}>
-        <div>
-            <Menu />
-            <BooksList />
-            <Footer />
-        </div>
-    </Provider>, document.getElementById('app')
+        <Router history={browserHistory}>
+                <Route path="/" component={Main}>
+                    <IndexRoute component={BooksList} />
+                    <Route path="admin" component={BookForm}/>
+                    <Route path="cart" component={Cart} />
+                </Route>
+        </Router>
+    </Provider>
+);
+
+
+render(
+    Routes , document.getElementById('app')
 );
 
 
