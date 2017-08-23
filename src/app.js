@@ -17,6 +17,7 @@ import { postBooks, deleteBooks, updateBooks} from './actions/booksActions'
 
 // IMPORT COMPONENTS 
 import BooksList from './components/pages/booksList';
+import Menu from './components/menu';
 
 
 //STEP 1 create the store
@@ -25,7 +26,10 @@ const store = createStore(reducers, middleware);
 
 render(
     <Provider store={store}>
-        <BooksList />
+        <div>
+            <Menu />
+            <BooksList />
+        </div>
     </Provider>, document.getElementById('app')
 );
 
