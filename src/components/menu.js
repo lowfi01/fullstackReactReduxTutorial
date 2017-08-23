@@ -7,7 +7,7 @@ class Menu extends React.Component {
     render() {
         return (
 
-            <Navbar inverse fixTop>
+            <Navbar inverse fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a href="/">React-Bootstrap</a>

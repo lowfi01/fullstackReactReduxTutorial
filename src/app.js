@@ -18,6 +18,7 @@ import { postBooks, deleteBooks, updateBooks} from './actions/booksActions'
 // IMPORT COMPONENTS 
 import BooksList from './components/pages/booksList';
 import Menu from './components/menu';
+import Footer from './components/footer';
 
 
 //STEP 1 create the store
@@ -29,6 +30,7 @@ render(
         <div>
             <Menu />
             <BooksList />
+            <Footer />
         </div>
     </Provider>, document.getElementById('app')
 );
