@@ -67,6 +67,34 @@ app.delete('/books/:_id', (req, res) => {
   })
 });
 
+
+// ------>>> UPDATE BOOKS <<<----------
+app.put('/books/:_id', function(req,res){
+  var book = req.body;
+  var query = { _id: req.params._id };
+
+  //if the field doesn't exist $set will set a new field
+  var update = {
+    '$set': {
+      title:book.title,
+      description:book.description,
+      price: book.price
+    }
+  };
+
+  //When true returns the updated document
+  var options = {new:true};
+
+  Books.findOneAndUpdate(query, update, options, function(err, books){
+    if(err){
+      throw err;
+      console.log('HELLO WORLD');
+    }
+    res.json(books);
+  })
+})
+
+
 // END APIs
 
 
