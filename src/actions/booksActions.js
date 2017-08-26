@@ -41,10 +41,18 @@ export function postBooks(book) {
 
 // DELETE A BOOK
 export function deleteBooks(_id) {
-    return {
-        type: "DELETE_BOOK",
-        payload: _id
+    return function(dispatch){
+        axios.delete("/books/" + _id).then((response)=>{
+            dispatch({type:"DELETE_BOOK", payload: _id})
+        }).catch((err)=> {
+            dispatch({type:"DELETE_BOOK_REJECTED", payload: "there was an error"})
+        })
     }
+
+    // return {
+    //     type: "DELETE_BOOK",
+    //     payload: _id
+    // }
 }
 
 // UPDATE A BOOK

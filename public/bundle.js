@@ -11171,10 +11171,18 @@ function postBooks(book) {
 
 // DELETE A BOOK
 function deleteBooks(_id) {
-    return {
-        type: "DELETE_BOOK",
-        payload: _id
+    return function (dispatch) {
+        _axios2.default.delete("/books/" + _id).then(function (response) {
+            dispatch({ type: "DELETE_BOOK", payload: _id });
+        }).catch(function (err) {
+            dispatch({ type: "DELETE_BOOK_REJECTED", payload: "there was an error" });
+        });
     };
+
+    // return {
+    //     type: "DELETE_BOOK",
+    //     payload: _id
+    // }
 }
 
 // UPDATE A BOOK
