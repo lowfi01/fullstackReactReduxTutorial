@@ -3,6 +3,9 @@
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger'
 
+// Redux middleware #Connecting to API
+import thunk from 'redux-thunk';
+
 // REACT
 import React from 'react';
 import { render } from 'react-dom';
@@ -30,7 +33,7 @@ import Main from './main';
 
 
 //STEP 1 create the store
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(thunk, logger);
 const store = createStore(reducers, middleware);
 
 
