@@ -3,10 +3,19 @@
 import axios from 'axios';
 
 // GET BOOKS 
-export function getBooks(book) {
-    return {
-        type: "GET_BOOKS"
+export function getBooks() {
+    return function(dispatch){
+        //get request to show books
+        axios.get("/books").then((response)=>{
+            dispatch({type:"GET_BOOKS", payload: response.data})
+        }).catch((err)=>{
+            dispatch({type: "GET_BOOKS_REJECTED", payload: err})
+        })
     }
+
+    // return {
+    //     type: "GET_BOOKS"
+    // }
 }
 
 // POST A BOOK
@@ -21,7 +30,7 @@ export function postBooks(book) {
             dispatch({type:"POST_BOOK_REJECTED", payload: "there was an error"})
         })
         }
-    }
+}
 
 
     // return {

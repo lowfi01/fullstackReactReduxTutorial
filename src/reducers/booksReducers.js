@@ -4,23 +4,14 @@
 
 //step 3 define reducers
 export function booksReducers(state = { // we hard code te books data
-    books: [{
-        _id: 1,
-        title: 'this is the book title',
-        description: 'this is the book description',
-        price: 40.33
-    },
-    {
-        _id: 2,
-        title: 'this is the second book title',
-        description: 'this is the second book description',
-        price: 60
-    }] }, action) {
+    books: [] 
+    }, action) {
     // the use of reducers is to evaluate what to do with the received action
     switch (action.type) {
         case "GET_BOOKS" : 
             // will return a copy of state & a copy of the books array from state
-            return {...state, books: [...state.books]}
+            return {...state, books: [...action.payload]}
+            break;
         case "POST_BOOK":
             return { books: [...state.books, ...action.payload] }
             break;

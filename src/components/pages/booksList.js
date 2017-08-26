@@ -14,8 +14,9 @@ import BooksForm from  './booksForms';
 import Cart from './cart';
 
 class BooksList extends React.Component{
-    componentDidCatch() {
+    componentDidMount() {
         //Dispatch an action
+        console.log("hello world")
         this.props.getBooks();
     }
     render() {
@@ -64,9 +65,11 @@ function mapStateToProps(state){
 
 //mapDispatchToProps - this will allow us to pass down access to actions
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({getBooks}, dispatch)
+    return bindActionCreators({
+        getBooks
+    }, dispatch)
 }
 
 
 // by passing mapStateToProps through connect, you are subscribing your component to the store. by doing this returns an updated state to our local component
-export default connect(mapStateToProps)(BooksList);
+export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
