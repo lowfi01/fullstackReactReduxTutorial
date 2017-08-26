@@ -6,7 +6,7 @@ import axios from 'axios';
 export function getBooks() {
     return function(dispatch){
         //get request to show books
-        axios.get("/books").then((response)=>{
+        axios.get("/api/books").then((response)=>{
             dispatch({type:"GET_BOOKS", payload: response.data})
         }).catch((err)=>{
             dispatch({type: "GET_BOOKS_REJECTED", payload: err})
@@ -23,7 +23,7 @@ export function postBooks(book) {
     //redux-thunk function
     return function(dispatch){
         //use axios to make http request
-        axios.post("/books", book).then((response) => {
+        axios.post("/api/books", book).then((response) => {
             // dispatch will follow original process only with a success response from database
             dispatch({type:"POST_BOOK", payload: response.data})
         }).catch((err)=> {
@@ -42,7 +42,7 @@ export function postBooks(book) {
 // DELETE A BOOK
 export function deleteBooks(_id) {
     return function(dispatch){
-        axios.delete("/books/" + _id).then((response)=>{
+        axios.delete("/api/books/" + _id).then((response)=>{
             dispatch({type:"DELETE_BOOK", payload: _id})
         }).catch((err)=> {
             dispatch({type:"DELETE_BOOK_REJECTED", payload: "there was an error"})

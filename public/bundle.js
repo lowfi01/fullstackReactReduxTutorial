@@ -11137,7 +11137,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function getBooks() {
     return function (dispatch) {
         //get request to show books
-        _axios2.default.get("/books").then(function (response) {
+        _axios2.default.get("/api/books").then(function (response) {
             dispatch({ type: "GET_BOOKS", payload: response.data });
         }).catch(function (err) {
             dispatch({ type: "GET_BOOKS_REJECTED", payload: err });
@@ -11154,7 +11154,7 @@ function postBooks(book) {
     //redux-thunk function
     return function (dispatch) {
         //use axios to make http request
-        _axios2.default.post("/books", book).then(function (response) {
+        _axios2.default.post("/api/books", book).then(function (response) {
             // dispatch will follow original process only with a success response from database
             dispatch({ type: "POST_BOOK", payload: response.data });
         }).catch(function (err) {
@@ -11172,7 +11172,7 @@ function postBooks(book) {
 // DELETE A BOOK
 function deleteBooks(_id) {
     return function (dispatch) {
-        _axios2.default.delete("/books/" + _id).then(function (response) {
+        _axios2.default.delete("/api/books/" + _id).then(function (response) {
             dispatch({ type: "DELETE_BOOK", payload: _id });
         }).catch(function (err) {
             dispatch({ type: "DELETE_BOOK_REJECTED", payload: "there was an error" });
